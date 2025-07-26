@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Supplier Entry Table</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body
+  style="background-image: url(images/mayondo.png); background-position: center; background-size:cover; height: px;">
+    <style>
+   .navbar {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgb(70, 49, 9);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      margin-right: 40px;
+    }
+
+    .brand img {
+      width: 80px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .brand-text {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .navbar a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: wheat;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      color: #007bff;
+    }   </style>
+
+   <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.jpg" alt="Logo" />
+        <span class="brand-text" style="color: wheat;">Mayondo Wood and Furniture</span>
+      </div>
+   
+
+      <a href="login.html">Login</a>
+      <a href="sales.html">Sales</a>
+      <a href="users.html">Users</a>
+      <a href="products.html">Products</a>
+      <a href="rawmaterial.html">Raw Materials</a>
+       <a href="Admin.html">Admin</a>
+    </div> 
+  <div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: wheat;">Suppliers entry form</h2>
+    <form id="supplierForm">
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Goods Received</th>
+            <th>Received By</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Type of Wood/Furniture</th>
+            <th>Supplier Name</th>
+            <th>Supplier Contact</th>
+            <th>Supplier Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="supplierTableBody">
+          <tr>
+            <td><input type="text" name="goods" class="form-control" required /></td>
+            <td>
+              <select name="receivedBy" class="form-select" required>
+                <option value="">Select</option>
+                <option>Manager</option>
+                <option>CEO</option>
+                <option>Salesperson</option>
+                <option>Store Manager</option>
+                <option>Attendant</option>
+              </select>
+            </td>
+            <td><input type="number" name="quantity" class="form-control" min="1" required /></td>
+            <td><input type="date" name="date" class="form-control" required /></td>
+            <td><input type="time" name="time" class="form-control" required /></td>
+            <td>
+              <select name="type" class="form-select" required>
+                <option value="">Select Type</option>
+                <option>Mahogany</option>
+                <option>Teak</option>
+                <option>Pine</option>
+                <option>MDF</option>
+                <option>Sofa</option>
+                <option>Coffee Table</option>
+                <option>Bed Frame</option>
+                <option>Wardrobe</option>
+              </select>
+            </td>
+            <td><input type="text" name="supplierName" class="form-control" required /></td>
+            <td><input type="text" name="supplierContact" class="form-control" required /></td>
+            <td><input type="email" name="supplierEmail" class="form-control" required /></td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-success" onclick="addRow()">Add Row</button>
+        <button type="submit" class="btn btn-primary">Submit All</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function addRow() {
+      const tableBody = document.getElementById("supplierTableBody");
+      const firstRow = tableBody.querySelector("tr");
+      const newRow = firstRow.cloneNode(true);
+
+      newRow.querySelectorAll("input, select").forEach(input => input.value = "");
+      tableBody.appendChild(newRow);
+    }
+
+    function deleteRow(button) {
+      const tableBody = document.getElementById("supplierTableBody");
+      if (tableBody.rows.length > 1) {
+        button.closest("tr").remove();
+      } else {
+        alert("At least one row must remain.");
+      }
+    }
+
+    document.getElementById("supplierForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const rows = document.querySelectorAll("#supplierTableBody tr");
+      const data = [];
+
+      rows.forEach(row => {
+        const rowData = {
+          goods: row.querySelector('[name="goods"]').value,
+          receivedBy: row.querySelector('[name="receivedBy"]').value,
+          quantity: row.querySelector('[name="quantity"]').value,
+          date: row.querySelector('[name="date"]').value,
+          time: row.querySelector('[name="time"]').value,
+          type: row.querySelector('[name="type"]').value,
+          supplierName: row.querySelector('[name="supplierName"]').value,
+          supplierContact: row.querySelector('[name="supplierContact"]').value,
+          supplierEmail: row.querySelector('[name="supplierEmail"]').value,
+        };
+        data.push(rowData);
+      });
+
+      console.log("Submitted Supplier Entries:", data);
+      alert("Supplier data submitted! Check the console.");
+    });
+  </script>
+  <!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+<script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
+</html>

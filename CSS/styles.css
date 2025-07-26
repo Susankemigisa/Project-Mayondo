@@ -1,0 +1,55 @@
+#form{
+   width: 600px;
+    margin: 20px auto;
+    padding: 25px;
+    border: 1px solid #1c0808;
+    border-radius: 20px;
+   background-color: wheat;
+}
+ /* Sidebar on the left */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #343a40;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+.sidebar a {
+  display: block;
+  color: #adb5bd;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.sidebar .brand {
+  color: white;
+  padding: 10px 20px;
+}
+
+/* Shift content to the right */
+body {
+  margin-left: 220px; /* same width as sidebar */
+  background-color: wheat;
+}
+
+/* Responsive behavior for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  body {
+    margin-left: 0;
+  }
+}

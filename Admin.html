@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company Dashboard with Login</title>
+    <link href="bootstrap-5.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body {
+        margin-left: 220px;
+        background-color: wheat;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100vh;
+        background-color: #343a40;
+        padding-top: 60px;
+        color: white;
+        display: none; /* hidden until logged in */
+      }
+
+      .sidebar a {
+        color: #adb5bd;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+      }
+
+      .sidebar a:hover {
+        background-color: #495057;
+        color: white;
+      }
+
+      .sidebar .brand {
+        color: white;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .main-content {
+        padding: 30px;
+        margin-left: 0;
+      }
+
+      .section-header {
+        border-bottom: 2px solid #dee2e6;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+      }
+
+      /* Login form styles */
+      #loginForm {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body 
+  style="background-image: url(images/mayondo.png); background-position: center; background-size:cover; height: px;"></body>>
+  
+    <!-- Login Form -->
+    <div id="loginForm" style="background-color: wheat;">
+  
+      <h3 class="mb-4">Login</h3>
+      <form id="formLogin">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label">Role</label>
+          <select id="role" class="form-select" required>
+            <option value="" selected disabled>Select role</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Administrator</option>
+            <option value="ceo">CEO</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="images/logo.jpg" alt="Logo" style="width: 80px" />
+        <div>Unified Dashboard</div>
+      </div>
+      <hr style="color: #ccc" />
+      <a href="#overview">Overview</a>
+
+      <a
+        href="login.html"
+        onclick="logout()"
+        style="color: #adb5bd; cursor: pointer"
+        >Logout</a
+      >
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent" style="display: none">
+      <h2 id="overview">Welcome, <span id="roleDisplay"></span></h2>
+      <p>
+        This dashboard gives you access to administrative, managerial, and
+        executive tools.
+      </p>
+
+      <!-- Manager Section -->
+      <h4 class="section-header" id="manager" style="display: none">
+        Manager Tools
+      </h4>
+      <div
+        class="row row-cols-1 row-cols-md-3 g-4"
+        id="managerTools"
+        style="display: none"
+      >
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>User Management</h5>
+              <p>Manage staff roles and access rights.</p>
+              <a href="users.html" class="btn btn-primary">Manage Users</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Inventory</h5>
+              <p>View raw materials and stock levels.</p>
+              <a href="rawmaterial.html" class="btn btn-primary">Inventory</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Sales Reports</h5>
+              <p>Analyze daily and monthly sales.</p>
+              <a href="sales.html" class="btn btn-primary">Reports</a>
+            </div>
+          </div>
+        </div>
+        <!-- Products -->
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Products</h5>
+              <p>Analyze products in stock.</p>
+              <a href="products.html" class="btn btn-primary">Reports</a>
+            </div>
+          </div>
+        </div>
+        <!-- Suppliers -->
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Suppliers</h5>
+              <p>Analyze the supply sheet.</p>
+              <a href="suppliers.html" class="btn btn-primary">Reports</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Section -->
+      <h4 class="section-header" id="admin">Administrator Tools</h4>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>Approvals</h5>
+              <p>Approve product listings or staff actions.</p>
+              <a href="suppliers.html" class="btn btn-secondary"
+                >Approval Queue</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CEO Section -->
+    <h4 class="section-header" id="ceo">CEO Tools</h4>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card h-100 bg-light border-primary">
+          <div class="card-body">
+            <h5>Analytics</h5>
+            <p>Business insights, KPIs, performance trends.</p>
+            <a href="#" class="btn btn-info">View Analytics</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 bg-light border-primary">
+          <div class="card-body">
+            <h5>Executive Summary</h5>
+            <p>High-level reports and strategy documents.</p>
+            <a href="#" class="btn btn-info">Reports</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const loginForm = document.getElementById("formLogin");
+      const sidebar = document.getElementById("sidebar");
+      const mainContent = document.getElementById("mainContent");
+      const roleDisplay = document.getElementById("roleDisplay");
+      const managerSection = document.getElementById("manager");
+      const managerTools = document.getElementById("managerTools");
+
+      // On load: check if logged in
+      window.onload = () => {
+        const role = localStorage.getItem("role");
+        if (role) {
+          showDashboard(role);
+        } else {
+          showLogin();
+        }
+      };
+
+      function showLogin() {
+        loginForm.parentElement.style.display = "block";
+        sidebar.style.display = "none";
+        mainContent.style.display = "none";
+      }
+
+      function showDashboard(role) {
+        loginForm.parentElement.style.display = "none";
+        sidebar.style.display = "block";
+        mainContent.style.display = "block";
+        roleDisplay.textContent = role.charAt(0).toUpperCase() + role.slice(1);
+
+        // Show manager tools + products + suppliers only for manager/admin/ceo
+        if (role === "manager" || role === "admin" || role === "ceo") {
+          managerSection.style.display = "block";
+          managerTools.style.display = "flex";
+        } else {
+          managerSection.style.display = "none";
+          managerTools.style.display = "none";
+        }
+
+        // Show admin section only if admin or ceo
+        document.getElementById("admin").style.display =
+          role === "admin" || role === "ceo" ? "block" : "none";
+
+        // Show CEO section only if CEO
+        document.getElementById("ceo").style.display =
+          role === "ceo" ? "block" : "none";
+      }
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Simple fake login
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const role = document.getElementById("role").value;
+
+        if (!username || !password || !role) {
+          alert("Please fill all fields");
+          return;
+        }
+
+        // For demo: accept any username/password, save role to localStorage
+        localStorage.setItem("role", role);
+        showDashboard(role);
+      });
+
+      function logout() {
+        localStorage.removeItem("role");
+        showLogin();
+      }
+    </script>
+  </body>
+</html>

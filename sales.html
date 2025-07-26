@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sales Table Form</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body
+   style="background-image: url(images/mayondo.png); background-position: center; background-size:cover; height: px;">
+    <style>
+   .navbar {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: wheat;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      margin-right: 40px;
+    }
+
+    .brand img {
+      width: 80px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .brand-text {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .navbar a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      color: #007bff;
+    }   </style>
+
+   <div class="navbar">
+      <div class="brand">
+        <img src="images/logo.jpg" alt="Logo" />
+        <span class="brand-text">Mayondo Wood and Furniture</span>
+      </div>
+   
+
+      <a href="login.html">Login</a>
+      <a href="products.html">Products</a>
+      <a href="users.html">Users</a>
+      <a href="suppliers.html">Suppliers</a>
+      <a href="rawmaterial.html">Raw Materials</a>
+       <a href="Admin.html">Admin</a>
+    </div> 
+  <div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: seashell;">Sales Entry Table</h2>
+    <form id="salesTableForm">
+      <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Salesperson</th>
+            <th>Role</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Item Sold</th>
+            <th>Quantity</th>
+            <th>Price/Unit</th>
+            <th>Total Price</th>
+            <th>Customer</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr>
+            <td><input type="text" name="salesperson" class="form-control" required /></td>
+            <td>
+              <select name="role" class="form-select" required>
+                <option value="">Select</option>
+                <option>Salesperson</option>
+                <option>Administrator</option>
+                <option>Manager</option>
+              </select>
+            </td>
+            <td><input type="date" name="date" class="form-control" required /></td>
+            <td><input type="time" name="time" class="form-control" required /></td>
+            <td><input type="text" name="item" class="form-control" required /></td>
+            <td><input type="number" name="quantity" class="form-control quantity" min="1" required /></td>
+            <td><input type="number" name="price" class="form-control price" step="0.01" required /></td>
+            <td><input type="text" name="total" class="form-control total" readonly /></td>
+            <td><input type="text" name="customer" class="form-control" required /></td>
+            <td><input type="text" name="notes" class="form-control" /></td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-success" onclick="addRow()">Add Row</button>
+        <button type="submit" class="btn btn-primary">Submit All</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function addRow() {
+      const row = document.querySelector("#tableBody tr");
+      const newRow = row.cloneNode(true);
+
+      newRow.querySelectorAll("input, select").forEach(input => {
+        input.value = "";
+      });
+
+      document.getElementById("tableBody").appendChild(newRow);
+    }
+
+    function deleteRow(button) {
+      const tableBody = document.getElementById("tableBody");
+      if (tableBody.rows.length > 1) {
+        button.closest("tr").remove();
+      } else {
+        alert("At least one row is required.");
+      }
+    }
+
+    document.getElementById("salesTableForm").addEventListener("input", function (e) {
+      if (e.target.classList.contains("quantity") || e.target.classList.contains("price")) {
+        const row = e.target.closest("tr");
+        const qty = parseFloat(row.querySelector(".quantity").value) || 0;
+        const price = parseFloat(row.querySelector(".price").value) || 0;
+        row.querySelector(".total").value = (qty * price).toFixed(2);
+      }
+    });
+
+    document.getElementById("salesTableForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const rows = document.querySelectorAll("#tableBody tr");
+      const data = [];
+
+      rows.forEach(row => {
+        const rowData = {
+          salesperson: row.querySelector('[name="salesperson"]').value,
+          role: row.querySelector('[name="role"]').value,
+          date: row.querySelector('[name="date"]').value,
+          time: row.querySelector('[name="time"]').value,
+          item: row.querySelector('[name="item"]').value,
+          quantity: row.querySelector('[name="quantity"]').value,
+          price: row.querySelector('[name="price"]').value,
+          total: row.querySelector('[name="total"]').value,
+          customer: row.querySelector('[name="customer"]').value,
+          notes: row.querySelector('[name="notes"]').value,
+        };
+        data.push(rowData);
+      });
+
+      console.log("Submitted Data:", data);
+      alert("Sales data submitted! Check the console.");
+    });
+  </script>
+  <!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-0">&copy; Mayondo wood and furniture. All rights reserved.</p>
+  </div>
+</footer>
+
+
+</body>
+<script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
+</html>
