@@ -8,7 +8,8 @@
     <style>
       body {
         margin-left: 220px;
-        background-color: wheat;
+        background-color: #f8f9fa;
+        color: white;
       }
 
       .sidebar {
@@ -62,18 +63,25 @@
         max-width: 400px;
         margin: 100px auto;
         padding: 30px;
-        background: white;
+        background: wheat;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        color: black;
       }
     </style>
   </head>
-  <body 
-  style="background-image: url(images/mayondo.png); background-position: center; background-size:cover; height: px;"></body>>
+  <body
+    style="
+      background-image: url(images/background1.jpg);
+      background-position: center;
+      background-size: cover;
+      height: 300px;
+    "
+  >
   
+
     <!-- Login Form -->
-    <div id="loginForm" style="background-color: wheat;">
-  
+    <div id="loginForm">
       <h3 class="mb-4">Login</h3>
       <form id="formLogin">
         <div class="mb-3">
@@ -105,18 +113,17 @@
       </div>
       <hr style="color: #ccc" />
       <a href="#overview">Overview</a>
-
       <a
         href="login.html"
         onclick="logout()"
         style="color: #adb5bd; cursor: pointer"
-        >Logout</a
-      >
+        >Logout</a>
+      
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="mainContent" style="display: none">
-      <h2 id="overview">Welcome, <span id="roleDisplay"></span></h2>
+      <h2 id="overview"><span id="roleDisplay">Admin</span></h2>
       <p>
         This dashboard gives you access to administrative, managerial, and
         executive tools.
@@ -188,37 +195,51 @@
             <div class="card-body">
               <h5>Approvals</h5>
               <p>Approve product listings or staff actions.</p>
-              <a href="suppliers.html" class="btn btn-secondary"
-                >Approval Queue</a
-              >
+              <a href="#" class="btn btn-secondary">Approval Queue</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5>System Settings</h5>
+              <p>Configure app preferences and data.</p>
+              <a href="#" class="btn btn-secondary">Settings</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CEO Section -->
+      <h4 class="section-header" id="ceo">CEO Tools</h4>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100 bg-light border-primary">
+            <div class="card-body">
+              <h5>Analytics</h5>
+              <p>Business insights, KPIs, performance trends.</p>
+              <a href="#" class="btn btn-info">View Analytics</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 bg-light border-primary">
+            <div class="card-body">
+              <h5>Executive Summary</h5>
+              <p>High-level reports and strategy documents.</p>
+              <a href="#" class="btn btn-info">Reports</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- CEO Section -->
-    <h4 class="section-header" id="ceo">CEO Tools</h4>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card h-100 bg-light border-primary">
-          <div class="card-body">
-            <h5>Analytics</h5>
-            <p>Business insights, KPIs, performance trends.</p>
-            <a href="#" class="btn btn-info">View Analytics</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-light border-primary">
-          <div class="card-body">
-            <h5>Executive Summary</h5>
-            <p>High-level reports and strategy documents.</p>
-            <a href="#" class="btn btn-info">Reports</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <button onclick="scrollToTop()" class="btn btn-outline-light mb-3">Back to Top ↑</button>
+    <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
+  </div>
+</footer>
 
     <script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
     <script>
