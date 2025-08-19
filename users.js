@@ -3,7 +3,6 @@
       "admin": { password: "1234", role: "Admin" },
       "manager": { password: "1234", role: "Manager" },
       "ceo": { password: "1234", role: "CEO" },
-      "attendant": { password: "1234", role: "Attendant" }
     };
 
     document.getElementById("loginForm").addEventListener("submit", function(e){

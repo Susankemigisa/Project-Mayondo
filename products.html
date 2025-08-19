@@ -7,7 +7,7 @@
     <link href="bootstrap-5.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="CSS/styles.css" rel="stylesheet" />
   </head>
-  <body >
+  <body>
 <!-- Left Sidebar Navbar -->
 <div class="sidebar">
   <div class="brand text-center">
@@ -23,7 +23,10 @@
   <a href="Admin.html">Admin</a>
 </div>
 
-
+<!-- Logout Button (top-right) -->
+<div style="position: absolute; top: 15px; right: 20px;">
+  <button class="btn btn-danger" onclick="logout()">Logout</button>
+</div>
 
     <h1>HOME OF COMFORT</h1>
     <p style="font-style: italic;">Your gate way to comfortable furniture that will brighten your mood like no
@@ -364,6 +367,11 @@
 <script>
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function logout() {
+    sessionStorage.clear();
+    window.location.href = "index.html"; // Redirect to login page
   }
 </script>
 

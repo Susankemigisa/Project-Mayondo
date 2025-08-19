@@ -78,8 +78,6 @@
       height: 300px;
     "
   >
-  
-
     <!-- Login Form -->
     <div id="loginForm">
       <h3 class="mb-4">Login</h3>
@@ -113,31 +111,19 @@
       </div>
       <hr style="color: #ccc" />
       <a href="#overview">Overview</a>
-      <a
-        href="login.html"
-        onclick="logout()"
-        style="color: #adb5bd; cursor: pointer"
-        >Logout</a>
-      
+      <a href="index.html" onclick="logout()" style="color: #adb5bd; cursor: pointer">Logout</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="mainContent" style="display: none">
       <h2 id="overview"><span id="roleDisplay">Admin</span></h2>
       <p>
-        This dashboard gives you access to administrative, managerial, and
-        executive tools.
+        This dashboard gives you access to administrative, managerial, and executive tools.
       </p>
 
       <!-- Manager Section -->
-      <h4 class="section-header" id="manager" style="display: none">
-        Manager Tools
-      </h4>
-      <div
-        class="row row-cols-1 row-cols-md-3 g-4"
-        id="managerTools"
-        style="display: none"
-      >
+      <h4 class="section-header" id="manager" style="display: none">Manager Tools</h4>
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="managerTools" style="display: none">
         <div class="col">
           <div class="card h-100">
             <div class="card-body">
@@ -233,84 +219,16 @@
         </div>
       </div>
     </div>
-  <!-- Footer -->
-<footer class="bg-dark text-light py-4 mt-5">
-  <div class="container text-center">
-    <button onclick="scrollToTop()" class="btn btn-outline-light mb-3">Back to Top ↑</button>
-    <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
-  </div>
-</footer>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container text-center">
+        <button onclick="scrollToTop()" class="btn btn-outline-light mb-3">Back to Top ↑</button>
+        <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
+      </div>
+    </footer>
 
     <script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      const loginForm = document.getElementById("formLogin");
-      const sidebar = document.getElementById("sidebar");
-      const mainContent = document.getElementById("mainContent");
-      const roleDisplay = document.getElementById("roleDisplay");
-      const managerSection = document.getElementById("manager");
-      const managerTools = document.getElementById("managerTools");
-
-      // On load: check if logged in
-      window.onload = () => {
-        const role = localStorage.getItem("role");
-        if (role) {
-          showDashboard(role);
-        } else {
-          showLogin();
-        }
-      };
-
-      function showLogin() {
-        loginForm.parentElement.style.display = "block";
-        sidebar.style.display = "none";
-        mainContent.style.display = "none";
-      }
-
-      function showDashboard(role) {
-        loginForm.parentElement.style.display = "none";
-        sidebar.style.display = "block";
-        mainContent.style.display = "block";
-        roleDisplay.textContent = role.charAt(0).toUpperCase() + role.slice(1);
-
-        // Show manager tools + products + suppliers only for manager/admin/ceo
-        if (role === "manager" || role === "admin" || role === "ceo") {
-          managerSection.style.display = "block";
-          managerTools.style.display = "flex";
-        } else {
-          managerSection.style.display = "none";
-          managerTools.style.display = "none";
-        }
-
-        // Show admin section only if admin or ceo
-        document.getElementById("admin").style.display =
-          role === "admin" || role === "ceo" ? "block" : "none";
-
-        // Show CEO section only if CEO
-        document.getElementById("ceo").style.display =
-          role === "ceo" ? "block" : "none";
-      }
-
-      loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        // Simple fake login
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const role = document.getElementById("role").value;
-
-        if (!username || !password || !role) {
-          alert("Please fill all fields");
-          return;
-        }
-
-        // For demo: accept any username/password, save role to localStorage
-        localStorage.setItem("role", role);
-        showDashboard(role);
-      });
-
-      function logout() {
-        localStorage.removeItem("role");
-        showLogin();
-      }
-    </script>
+    <script src="admin.js"></script>
   </body>
 </html>

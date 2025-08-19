@@ -2,8 +2,6 @@
     const users = {
       attendant: "1234",
       manager: "admin123",
-      ceo: "ceo1234",
-      admin: "admin456"
     };
 
     document.addEventListener("DOMContentLoaded", () => {
