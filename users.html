@@ -4,81 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Users Entry Form</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
-    .contact-group {
-      display: flex;
+    body {
+      background-image: url(images/mayongo2.png);
+      background-position: center;
+      background-size: cover;
     }
-    .contact-group select {
-      max-width: 100px;
-      border-right: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    .contact-group input {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+    .contact-group { display: flex; }
+    .contact-group select { max-width: 100px; border-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+    .contact-group input { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+    #mainContent { display: none; } /* Hide content until login */
   </style>
 </head>
-<body
-  style="background-image: url(images/mayongo2.png); background-position: center; background-size:cover; height: px;">
-    <style>
-   .navbar {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: rgb(205, 159, 76)
-    }
+<body>
+  
+  <!-- Navbar -->
+  <div class="navbar" style="display:flex; align-items:center; padding:10px 20px; background-color:rgb(205,159,76)">
+    <div class="brand" style="display:flex; align-items:center; margin-right:40px;">
+      <img src="images/logo.jpg" alt="Logo" style="width:80px; margin-right:10px; border-radius:50%;" />
+      <span class="brand-text fw-bold" style="color: black;">Mayondo Wood and Furniture</span>
+    </div>
+    <a href="#" class="fw-bold me-3 text-black text-decoration-none">Login</a>
+    <a href="sales.html" class="fw-bold me-3 text-black text-decoration-none">Sales</a>
+    <a href="products.html" class="fw-bold me-3 text-black text-decoration-none">Products</a>
+    <a href="suppliers.html" class="fw-bold me-3 text-black text-decoration-none">Suppliers</a>
+    <a href="rawmaterial.html" class="fw-bold me-3 text-black text-decoration-none">Raw Materials</a>
+    <a href="Admin.html" class="fw-bold text-black text-decoration-none">Admin</a>
+  </div> 
 
-    .brand {
-      display: flex;
-      align-items: center;
-      margin-right: 40px;
-    }
+  <!-- LOGIN PAGE -->
+  <div class="container mt-5" id="loginPage">
+    <div class="card shadow p-4" style="max-width:400px; margin:auto;">
+      <h3 class="text-center mb-3">Manager Login</h3>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" id="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select id="role" class="form-select" required>
+            <option value="">Select Role</option>
+            <option>Admin</option>
+            <option>Manager</option>
+            <option>CEO</option>
+            <option>Attendant</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <p id="loginError" class="text-danger mt-2"></p>
+      </form>
+    </div>
+  </div>
 
-    .brand img {
-      width: 80px;
-      margin-right: 10px;
-      border-radius: 50%;
-    }
+  <!-- MAIN CONTENT -->
+  <div id="mainContent" class="container mt-5">
+    <h2 class="text-center mb-4 text-light">User Entry Form</h2>
+    <p class="text-center text-warning">Logged in as: <span id="loggedInRole"></span></p>
 
-    .brand-text {
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .navbar a {
-      margin-right: 20px;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-    }
-
-    .navbar a:hover {
-      color: #007bff;
-    }   </style>
-
-   <div class="navbar">
-      <div class="brand">
-        <img src="images/logo.jpg" alt="Logo" />
-        <span class="brand-text" style="color: black;">Mayondo Wood and Furniture</span>
-      </div>
-   
-
-      <a href="index.html">Login</a>
-      <a href="sales.html">Sales</a>
-      <a href="products.html">Products</a>
-      <a href="suppliers.html">Suppliers</a>
-      <a href="rawmaterial.html">Raw Materials</a>
-       <a href="Admin.html">Admin</a>
-    </div> 
-  <div class="container mt-5">
-    <h2 class="text-center mb-4" style="color: bisque;">User Entry form</h2>
     <form id="usersForm">
+      <!-- USERS TABLE -->
       <table class="table table-bordered text-center align-middle">
         <thead class="table-dark">
           <tr>
@@ -113,78 +103,41 @@
                 <option value="">Select</option>
                 <option>Admin</option>
                 <option>Manager</option>
-                <option>Salesperson</option>
-                <option>Store Clerk</option>
+                <option>CEO</option>
               </select>
             </td>
             <td><input type="text" name="address" class="form-control" required /></td>
-            <td>
-              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button>
-            </td>
+            <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>
           </tr>
         </tbody>
       </table>
 
-      <div class="d-flex justify-content-between mt-3">
+      <div class="d-flex justify-content-between mt-3 mb-5">
         <button type="button" class="btn btn-success" onclick="addRow()">Add Row</button>
         <button type="submit" class="btn btn-primary">Submit All</button>
       </div>
+
+      <!-- ATTENDANTS TABLE -->
+      <h3 class="text-center mb-3 text-light">Attendants (8 Members)</h3>
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-secondary">
+          <tr>
+            <th style="background-color: rgb(38, 38, 41); color: aliceblue;" >Name</th>
+            <th style="background-color: rgb(38, 38, 41); color: aliceblue;" >Task</th>
+          </tr>
+        </thead>
+        <tbody id="attendantsTableBody"></tbody>
+      </table>
     </form>
   </div>
 
-  <script>
-    function addRow() {
-      const tableBody = document.getElementById("usersTableBody");
-      const firstRow = tableBody.querySelector("tr");
-      const newRow = firstRow.cloneNode(true);
-      newRow.querySelectorAll("input, select").forEach(input => input.value = "");
-      tableBody.appendChild(newRow);
-    }
-
-    function deleteRow(button) {
-      const tableBody = document.getElementById("usersTableBody");
-      if (tableBody.rows.length > 1) {
-        button.closest("tr").remove();
-      } else {
-        alert("At least one row must remain.");
-      }
-    }
-
-    document.getElementById("usersForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const rows = document.querySelectorAll("#usersTableBody tr");
-      const usersData = [];
-
-      rows.forEach(row => {
-        const fullName = row.querySelector('[name="fullName"]').value;
-        const email = row.querySelector('[name="email"]').value;
-        const code = row.querySelector('[name="countryCode"]').value;
-        const number = row.querySelector('[name="contact"]').value;
-        const role = row.querySelector('[name="role"]').value;
-        const address = row.querySelector('[name="address"]').value;
-
-        const fullContact = code + number;
-
-        usersData.push({
-          fullName,
-          email,
-          contact: fullContact,
-          role,
-          address
-        });
-      });
-
-      console.log("Submitted Users:", usersData);
-      alert("User data submitted! Check the console.");
-    });
-  </script>
   <!-- Footer -->
-<footer class="bg-dark text-light py-4 mt-5">
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
-  </div>
-</footer>
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
+    </div>
+  </footer>
 
+  <script src="users.js"></script>
 </body>
-<script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
 </html>
