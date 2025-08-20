@@ -7,9 +7,9 @@
 
       // ✅ Predefined accounts (role + username + password)
       const accounts = {
-        manager: { username: "manager", password: "manager123" },
-        admin: { username: "admin", password: "admin123" },
-        ceo: { username: "ceo", password: "ceo123" }
+        manager: { username: "manager", password: "manager1234" },
+        admin: { username: "admin", password: "admin1234" },
+        ceo: { username: "ceo", password: "ceo1234" }
       };
 
       // On load: check if logged in

@@ -1,8 +1,8 @@
  // SIMPLE LOGIN SYSTEM
     const validUsers = {
-      "admin": { password: "1234", role: "Admin" },
-      "manager": { password: "1234", role: "Manager" },
-      "ceo": { password: "1234", role: "CEO" },
+      "admin": { password: "admin1234", role: "Admin" },
+      "manager": { password: "manager1234", role: "Manager" },
+      "ceo": { password: "ceo1234", role: "CEO" },
     };
 
     document.getElementById("loginForm").addEventListener("submit", function(e){

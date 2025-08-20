@@ -1,6 +1,6 @@
   // Hardcoded login credentials
   const managerUsername = "manager";
-  const managerPassword = "12345";
+  const managerPassword = "manager1234";
 
   // Show login section
   function showLogin() {

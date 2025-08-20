@@ -1,7 +1,7 @@
    // Hardcoded users
     const users = {
-      attendant: "1234",
-      manager: "admin123",
+      attendant: "attendant1234",
+      manager: "admin1234",
     };
 
     document.addEventListener("DOMContentLoaded", () => {
