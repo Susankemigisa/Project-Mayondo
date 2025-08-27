@@ -1,9 +1,9 @@
-Mayondo Wood & Furniture Management System
+# Mayondo Wood & Furniture Management System
 
 A browser-based management system built with HTML, CSS, JavaScript, and LocalStorage.
 It helps small/medium businesses manage daily operations including sales, inventory, staff attendance, and product approvals.
 
-🚀 Features
+# Features
 # Sales Management
 
 Record daily sales (with receipt printing).
