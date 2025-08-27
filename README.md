@@ -70,11 +70,11 @@ project-root/
  images/             # Logo and static assets
  README.md           # Documentation
 
- #Installation
+ # Installation
 
 Clone the repository:
 
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
+git clone https://github.com/Susankemigisa /https://github.com/Susankemigisa/Project-Mayondo.git
 
 
 Open index.html in your browser.
@@ -90,7 +90,7 @@ Data is stored locally in your browser (localStorage).
 
 Use the Print / Download buttons in Sales, Inventory, and Attendance to export reports.
 
- #Future Improvements
+ # Future Improvements
 
  Migrate LocalStorage to a database (e.g., Firebase, Supabase, or MySQL).
 
@@ -100,6 +100,6 @@ Use the Print / Download buttons in Sales, Inventory, and Attendance to export r
 
  Multi-user authentication with sessions.
 
- #Author
+ # Author
 Suzan Kemigisa
 Built for Mayondo Wood & Furniture digital transformation.
