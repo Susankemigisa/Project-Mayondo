@@ -1,142 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Users Entry Form</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <style>
-    body {
-      background-image: url(images/mayongo2.png);
-      background-position: center;
-      background-size: cover;
-    }
-    .contact-group { display: flex; }
-    .contact-group select { max-width: 100px; border-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
-    .contact-group input { border-top-left-radius: 0; border-bottom-left-radius: 0; }
-    #mainContent { display: none; } /* Hide content until login */
-  </style>
-</head>
-<body>
-  
-  <!-- Navbar -->
-  <div class="navbar" style="display:flex; align-items:center; padding:10px 20px; background-color:rgb(205,159,76)">
-    <div class="brand" style="display:flex; align-items:center; margin-right:40px;">
-      <img src="images/logo.jpg" alt="Logo" style="width:80px; margin-right:10px; border-radius:50%;" />
-      <span class="brand-text fw-bold" style="color: black;">Mayondo Wood and Furniture</span>
-    </div>
-    <a href="#" class="fw-bold me-3 text-black text-decoration-none">Login</a>
-    <a href="sales.html" class="fw-bold me-3 text-black text-decoration-none">Sales</a>
-    <a href="products.html" class="fw-bold me-3 text-black text-decoration-none">Products</a>
-    <a href="suppliers.html" class="fw-bold me-3 text-black text-decoration-none">Suppliers</a>
-    <a href="rawmaterial.html" class="fw-bold me-3 text-black text-decoration-none">Raw Materials</a>
-    <a href="Admin.html" class="fw-bold text-black text-decoration-none">Admin</a>
-  </div> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF — Users Management</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #6b4226;
+        color: #d8c3a5;
+        padding: 24px;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 26px;
+      }
+      header p {
+        color: #a7abb5;
+        margin: 6px 0 0;
+      }
 
-  <!-- LOGIN PAGE -->
-  <div class="container mt-5" id="loginPage">
-    <div class="card shadow p-4" style="max-width:400px; margin:auto;">
-      <h3 class="text-center mb-3">Manager Login</h3>
-      <form id="loginForm">
-        <div class="mb-3">
-          <label class="form-label">Username</label>
-          <input type="text" id="username" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" id="password" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Role</label>
-          <select id="role" class="form-select" required>
-            <option value="">Select Role</option>
-            <option>Admin</option>
-            <option>Manager</option>
-            <option>CEO</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-        <p id="loginError" class="text-danger mt-2"></p>
-      </form>
-    </div>
-  </div>
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        gap: 30px;
+      }
+      section {
+        background: #5b3a29;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        color: #a7abb5;
+      }
 
-  <!-- MAIN CONTENT -->
-  <div id="mainContent" class="container mt-5">
-    <h2 class="text-center mb-4 text-light">User Entry Form</h2>
-    <p class="text-center text-warning">Logged in as: <span id="loggedInRole"></span></p>
+      label {
+        display: block;
+        margin: 10px 0 4px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background-color: #6b7280;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
 
-    <form id="usersForm">
-      <!-- USERS TABLE -->
-      <table class="table table-bordered text-center align-middle">
-        <thead class="table-dark">
-          <tr>
-            <th>Full Name</th>
-            <th>Email Address</th>
-            <th>Contact Number</th>
-            <th>Role</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="usersTableBody">
-          <tr>
-            <td><input type="text" name="fullName" class="form-control" required /></td>
-            <td><input type="email" name="email" class="form-control" required /></td>
-            <td>
-              <div class="contact-group">
-                <select name="countryCode" class="form-select" required>
-                  <option value="">Code</option>
-                  <option value="+256">+256 (UG)</option>
-                  <option value="+254">+254 (KE)</option>
-                  <option value="+255">+255 (TZ)</option>
-                  <option value="+250">+250 (RW)</option>
-                  <option value="+1">+1 (US)</option>
-                  <option value="+44">+44 (UK)</option>
-                </select>
-                <input type="tel" name="contact" class="form-control" required placeholder="7XXXXXXXX" />
-              </div>
-            </td>
-            <td>
-              <select name="role" class="form-select" required>
-                <option value="">Select</option>
-                <option>Admin</option>
-                <option>Manager</option>
-                <option>CEO</option>
-              </select>
-            </td>
-            <td><input type="text" name="address" class="form-control" required /></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
+      button {
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .add {
+        background: #6b7280;
+        color: #d8c3a5;
+        margin-top: 12px;
+      }
+      .danger {
+        background: #e07a5f;
+        color: #d8c3a5;
+      }
+      .edit {
+        background-color: #6b7280;
+        color: #d8c3a5;
+      }
 
-      <div class="d-flex justify-content-between mt-3 mb-5">
-        <button type="button" class="btn btn-success" onclick="addRow()">Add Row</button>
-        <button type="submit" class="btn btn-primary">Submit All</button>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid#6b7280;
+        text-align: left;
+      }
+      th {
+        background: #6b4226;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div
+        class="navbar"
+        style="
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #5b3a29;
+        "
+      >
+        <img
+          src="images/logo.jpg"
+          alt="Logo"
+          style="
+            width: 80px;
+            margin-right: 10px;
+            border-radius: 50%;
+            display: flex;
+          "
+        />
+        <span class="brand-text fw-bold">Mayondo Wood and Furniture</span>
       </div>
+      <h1>Users Management</h1>
+      <p>Manage 8 attendants and the manager</p>
+    </header>
 
-      <!-- ATTENDANTS TABLE -->
-      <h3 class="text-center mb-3 text-light">Attendants (8 Members)</h3>
-      <table class="table table-bordered text-center align-middle">
-        <thead class="table-secondary">
-          <tr>
-            <th style="background-color: rgb(38, 38, 41); color: aliceblue;" >Name</th>
-            <th style="background-color: rgb(38, 38, 41); color: aliceblue;" >Task</th>
-          </tr>
-        </thead>
-        <tbody id="attendantsTableBody"></tbody>
-      </table>
-    </form>
-  </div>
+    <div class="container">
+      <!-- Add User Form -->
+      <section>
+        <h2>Add / Edit User</h2>
+        <div class="form-grid">
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="fullName" />
+          </div>
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="email" />
+          </div>
+          <div>
+            <label>Country Code</label>
+            <select id="countryCode">
+              <option value="+256" selected>+256 (Uganda)</option>
+              <option value="+254">+254 (Kenya)</option>
+              <option value="+255">+255 (Tanzania)</option>
+              <option value="+250">+250 (Rwanda)</option>
+            </select>
+          </div>
+          <div>
+            <label>Contact Number</label>
+            <input type="tel" id="contact" />
+          </div>
+          <div>
+            <label>Role</label>
+            <select id="role">
+              <option value="Manager">Manager</option>
+              <option value="Attendant">Attendant</option>
+            </select>
+          </div>
+          <div>
+            <label>Responsibilities</label>
+            <select id="responsibilities" multiple size="4">
+              <option value="record_stock">Recording Stock</option>
+              <option value="record_sales">Recording Sales</option>
+              <option value="loading">Loading</option>
+              <option value="offloading">Offloading</option>
+            </select>
+          </div>
+          <div>
+            <label>Address</label>
+            <input type="text" id="address" />
+          </div>
+        </div>
+        <button class="add" onclick="addUser()">Save User</button>
+      </section>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-light py-4 mt-5">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2025 Mayondo wood and furniture. All rights reserved.</p>
+      <!-- Users List -->
+      <section>
+        <h2>Users List</h2>
+        <table id="usersTable">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Role</th>
+              <th>Responsibilities</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
     </div>
-  </footer>
 
-  <script src="users.js"></script>
-</body>
+    <script src="users.js"></script>
+  </body>
 </html>

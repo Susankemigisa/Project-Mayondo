@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF — System Settings</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #264653;
+        color: #1f2937;
+        padding: 24px;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 26px;
+      }
+      header p {
+        color: #6b7280;
+        margin: 6px 0 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: grid;
+        gap: 24px;
+      }
+      section {
+        background: #1f2937;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        color:  #aeb1b6;
+      }
+
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background-color: #264653;
+        color:  #aeb1b6;
+      }
+
+      .roles {
+        display: grid;
+        gap: 12px;
+      }
+      .role-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .role-row input {
+        flex: 1;
+      }
+      .role-row select {
+        width: 140px;
+      }
+
+      button {
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .save {
+        background:#1f2937;
+        color: #aeb1b6;
+      }
+      .add {
+        background:  #264653;
+        color: #aeb1b6;
+        margin-top: 10px;
+      }
+      .danger {
+        background:  #e07a5f;
+        color: #1f2937;
+      }
+
+      .muted {
+        color: #6b7280;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>System Settings</h1>
+      <p>Configure application preferences and data</p>
+    </header>
+
+    <div class="container">
+      <!-- General Settings -->
+      <section>
+        <h2>General Settings</h2>
+        <label>Company Name</label>
+        <input
+          type="text"
+          id="companyName"
+          value="Mayondo Wood & Furniture Ltd"
+        />
+
+        <label>Default Currency</label>
+        <select id="currency">
+          <option value="UGX" selected>UGX (Uganda Shillings)</option>
+          <option value="USD">USD (US Dollar)</option>
+          <option value="KES">KES (Kenya Shillings)</option>
+        </select>
+
+        <label>Reporting Frequency</label>
+        <select id="reportFreq">
+          <option value="daily">Daily</option>
+          <option value="weekly" selected>Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </section>
+
+      <!-- Sales Settings -->
+      <section>
+        <h2>Sales Settings</h2>
+        <label>Default Transport Fee (%)</label>
+        <input type="number" id="transportFee" value="5" min="0" step="0.1" />
+
+        <label>Allowed Payment Methods</label>
+        <select id="paymentMethods" multiple size="3">
+          <option value="cash" selected>Cash</option>
+          <option value="cheque" selected>Cheque</option>
+          <option value="overdraft" selected>Bank Overdraft</option>
+        </select>
+        <div class="muted">
+        </div>
+      </section>
+
+      <!-- Stock Settings -->
+      <section>
+        <h2>Stock Settings</h2>
+        <label>Default Quality Levels</label>
+        <input type="text" id="qualityLevels" value="High, Medium, Low" />
+
+        <label>Enable Optional Fields</label>
+        <select id="optionalFields" multiple size="2">
+          <option value="color" selected>Color</option>
+          <option value="measurements" selected>Measurements</option>
+        </select>
+        <div class="muted">
+          Select which stock attributes should be required
+        </div>
+      </section>
+
+      <!-- User & Role Settings -->
+      <section>
+        <h2>User & Role Settings</h2>
+        <div id="roles" class="roles"></div>
+        <button class="add" onclick="addUser()">+ Add User</button>
+      </section>
+
+      <!-- Data Management -->
+      <section>
+        <h2>Data Management</h2>
+        <button onclick="exportData()">Export Settings</button>
+        <input type="file" id="importFile" accept=".json" />
+        <button class="danger" onclick="resetSettings()">
+          Reset to Defaults
+        </button>
+      </section>
+
+      <button class="save" onclick="saveSettings()">Save Settings</button>
+    </div>
+
+    <script src="settings.js"></script>
+  </body>
+</html>

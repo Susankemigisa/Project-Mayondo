@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MWF — Inventory Management</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #5b3a29;
+      color: #fff;
+      padding: 20px;
+    }
+    section {
+      background: #264653;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    input, select {
+      width: 100%;
+      padding: 6px;
+      border-radius: 4px;
+      border: none;
+      background-color: #955e42;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .add { background: #6b7280; color: #fff; }
+    .delete { background: #e07a5f; color: #000; }
+    .secondary { background: #955e42; color: #000; }
+    .warning { background: #955e42; color: #000; }
+    .secondary-report { background: #6b7280; color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #5b3a29;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #333;
+    }
+    th {
+      background: #6b7280;
+    }
+    pre {
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .chart-card {
+      background: #2a2a4a;
+      padding: 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inventory Management</h1>
+
+  <!-- Add Product Table -->
+  <section>
+    <h2>Add Products</h2>
+    <table id="addProductTable">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Unit Price (UGX)</th>
+          <th>Supplier</th>
+          <th>Date Received</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button class="secondary" onclick="addRow()">➕ Add Row</button>
+    <button class="add" onclick="saveAllProducts()">💾 Save All to Inventory</button>
+  </section>
+
+  <!-- Inventory Table -->
+  <section>
+    <h2>Inventory Records</h2>
+    <button class="delete" onclick="deleteSelected()">❌ Delete Selected</button>
+    <button class="secondary" onclick="sendSelectedToApprovals()">📤 Send Selected to Approvals</button>
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Supplier</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- Inventory Charts -->
+  <section>
+    <h2>Inventory Insights</h2>
+    <div class="charts">
+      <div class="chart-card">
+        <h3>Stock Levels</h3>
+        <canvas id="inventoryChart" height="180"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Low Stock Items</h3>
+        <canvas id="lowStockChart" height="180"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manager Report -->
+  <section>
+    <h2>Manager Inventory Report</h2>
+    <pre id="reportBox">No report generated yet.</pre>
+    <button class="warning" onclick="generateInventoryReport()">Generate Report</button>
+    <button class="secondary-report" onclick="printInventoryReport()">Print Report</button>
+  </section>
+
+  <script src="inventory.js"></script>
+</body>
+</html>

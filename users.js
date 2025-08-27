@@ -1,83 +1,213 @@
- // SIMPLE LOGIN SYSTEM
-    const validUsers = {
-      "admin": { password: "admin1234", role: "Admin" },
-      "manager": { password: "manager1234", role: "Manager" },
-      "ceo": { password: "ceo1234", role: "CEO" },
-    };
+// Preload 8 attendants + 1 manager if no data exists
+let users = JSON.parse(localStorage.getItem("mwfUsers")) || null;
+if (!users) {
+  users = [
+    {
+      fullName: "General Manager",
+      email: "manager@mwf.com",
+      countryCode: "+256",
+      contact: "700000001",
+      role: "Manager",
+      responsibilities: ["Approval", "Reporting"],
+      address: "Kampala",
+    },
+    {
+      fullName: "Attendant 1",
+      email: "att1@mwf.com",
+      countryCode: "+256",
+      contact: "700000002",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 2",
+      email: "att2@mwf.com",
+      countryCode: "+256",
+      contact: "700000003",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 3",
+      email: "att3@mwf.com",
+      countryCode: "+256",
+      contact: "700000004",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 4",
+      email: "att4@mwf.com",
+      countryCode: "+256",
+      contact: "700000005",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 5",
+      email: "att5@mwf.com",
+      countryCode: "+256",
+      contact: "700000006",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 6",
+      email: "att6@mwf.com",
+      countryCode: "+256",
+      contact: "700000007",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 7",
+      email: "att7@mwf.com",
+      countryCode: "+256",
+      contact: "700000008",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+    {
+      fullName: "Attendant 8",
+      email: "att8@mwf.com",
+      countryCode: "+256",
+      contact: "700000009",
+      role: "Attendant",
+      responsibilities: [
+        "Recording Stock",
+        "Recording Sales",
+        "Loading",
+        "Offloading",
+      ],
+      address: "Warehouse",
+    },
+  ];
+  localStorage.setItem("mwfUsers", JSON.stringify(users));
+}
 
-    document.getElementById("loginForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const username = document.getElementById("username").value.toLowerCase();
-      const password = document.getElementById("password").value;
-      const role = document.getElementById("role").value;
+let editIndex = null;
 
-      if(validUsers[username] && validUsers[username].password === password && validUsers[username].role === role){
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        document.getElementById("loggedInRole").innerText = role;
-        loadAttendants();
-      } else {
-        document.getElementById("loginError").innerText = "Invalid login credentials!";
-      }
-    });
-
-    // ATTENDANTS
-    function loadAttendants(){
-      const tbody = document.getElementById("attendantsTableBody");
-      tbody.innerHTML = "";
-      for (let i = 1; i <= 8; i++) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><input type="text" name="attendantName" class="form-control" placeholder="Attendant ${i} Name" required /></td>
+function renderUsers() {
+  users = JSON.parse(localStorage.getItem("mwfUsers")) || [];
+  const tbody = document.querySelector("#usersTable tbody");
+  tbody.innerHTML = users
+    .map(
+      (u, i) => `
+        <tr>
+          <td>${u.fullName}</td>
+          <td>${u.email}</td>
+          <td>${u.countryCode} ${u.contact}</td>
+          <td>${u.role}</td>
+          <td>${(u.responsibilities || []).join(", ")}</td>
+          <td>${u.address}</td>
           <td>
-            <select name="attendantTask" class="form-select" required>
-              <option value="">Select Task</option>
-              <option>Recording Stock</option>
-              <option>Sales</option>
-              <option>Loading</option>
-              <option>Offloading</option>
-            </select>
+            <button class='edit' onclick="editUser(${i})">Edit</button>
+            <button class='danger' onclick="deleteUser(${i})">Delete</button>
           </td>
-        `;
-        tbody.appendChild(row);
-      }
-    }
+        </tr>
+      `
+    )
+    .join("");
+}
 
-    // ADD / DELETE ROWS
-    function addRow(){
-      const table = document.getElementById("usersTableBody");
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td><input type="text" name="fullName" class="form-control" required /></td>
-        <td><input type="email" name="email" class="form-control" required /></td>
-        <td>
-          <div class="contact-group">
-            <select name="countryCode" class="form-select" required>
-              <option value="">Code</option>
-              <option value="+256">+256 (UG)</option>
-              <option value="+254">+254 (KE)</option>
-              <option value="+255">+255 (TZ)</option>
-              <option value="+250">+250 (RW)</option>
-              <option value="+1">+1 (US)</option>
-              <option value="+44">+44 (UK)</option>
-            </select>
-            <input type="tel" name="contact" class="form-control" required placeholder="7XXXXXXXX" />
-          </div>
-        </td>
-        <td>
-          <select name="role" class="form-select" required>
-            <option value="">Select</option>
-            <option>Admin</option>
-            <option>Manager</option>
-            <option>CEO</option>
-          </select>
-        </td>
-        <td><input type="text" name="address" class="form-control" required /></td>
-        <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>
-      `;
-      table.appendChild(row);
-    }
+function addUser() {
+  const user = {
+    fullName: document.getElementById("fullName").value,
+    email: document.getElementById("email").value,
+    countryCode: document.getElementById("countryCode").value,
+    contact: document.getElementById("contact").value,
+    role: document.getElementById("role").value,
+    responsibilities: Array.from(
+      document.getElementById("responsibilities").selectedOptions
+    ).map((o) => o.text),
+    address: document.getElementById("address").value,
+  };
 
-    function deleteRow(btn){
-      btn.closest("tr").remove();
-    }
+  if (editIndex !== null) {
+    users[editIndex] = user;
+    editIndex = null;
+  } else {
+    users.push(user);
+  }
+  localStorage.setItem("mwfUsers", JSON.stringify(users));
+  clearForm();
+  renderUsers();
+}
+
+function editUser(i) {
+  const u = users[i];
+  document.getElementById("fullName").value = u.fullName;
+  document.getElementById("email").value = u.email;
+  document.getElementById("countryCode").value = u.countryCode;
+  document.getElementById("contact").value = u.contact;
+  document.getElementById("role").value = u.role;
+  document.getElementById("address").value = u.address;
+  const respSel = document.getElementById("responsibilities");
+  Array.from(respSel.options).forEach(
+    (opt) => (opt.selected = (u.responsibilities || []).includes(opt.text))
+  );
+  editIndex = i;
+}
+
+function deleteUser(i) {
+  const u = users[i];
+  if (confirm(`Are you sure you want to delete ${u.fullName}?`)) {
+    users.splice(i, 1);
+    localStorage.setItem("mwfUsers", JSON.stringify(users));
+    renderUsers();
+  }
+}
+
+function clearForm() {
+  document.getElementById("fullName").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("countryCode").value = "+256";
+  document.getElementById("contact").value = "";
+  document.getElementById("role").value = "Attendant";
+  document.getElementById("responsibilities").selectedIndex = -1;
+  document.getElementById("address").value = "";
+}
+
+renderUsers();

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MWF — Approve Product Listing</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #5B3A29;
+      color:#d8c3a5;
+      padding: 24px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+    header p {
+      color: #6b7280;
+      margin: 6px 0 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 30px;
+    }
+    section {
+      background: #264653;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      color:#d8c3a5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #6b7280;
+      text-align: left;
+    }
+    th {
+      background: #5B3A29;
+      font-weight: 600;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .approve {
+      background:#6b7280;
+      color: #fff;
+    }
+    .reject {
+      background:  #e07a5f;
+      color: #fff;
+    }
+
+    .muted {
+      color: #6b7280;
+      font-size: 13px;
+    }
+    #statusMsg {
+      text-align:center;
+      margin-bottom:15px;
+      font-weight:bold;
+      color: #90ee90;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mayondo Wood & Furniture</h1>
+    <p>Product Approval Panel</p>
+  </header>
+
+  <!-- Status Message -->
+  <div id="statusMsg"></div>
+
+  <div class="container">
+    <!-- Pending Products -->
+    <section>
+      <h2>Pending Product Listings</h2>
+      <table id="pendingTable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Type</th>
+            <th>Cost Price</th>
+            <th>Quantity</th>
+            <th>Supplier</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Approved -->
+    <section>
+      <h2>Approved Products</h2>
+      <table id="approvedTable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Type</th>
+            <th>Cost Price</th>
+            <th>Quantity</th>
+            <th>Supplier</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Rejected -->
+    <section>
+      <h2>Rejected Products</h2>
+      <table id="rejectedTable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Reason</th>
+            <th>Supplier</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="approvals.js"></script>
+
+</body>
+</html>

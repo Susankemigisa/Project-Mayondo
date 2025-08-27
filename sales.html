@@ -1,157 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sales Management</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    .navbar {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: wheat;
-    }
-    .brand { display: flex; align-items: center; margin-right: 40px; }
-    .brand img { width: 80px; margin-right: 10px; border-radius: 50%; }
-    .brand-text { font-weight: bold; font-size: 18px; }
-    .navbar a, .navbar button {
-      margin-right: 20px; text-decoration: none; color: #333; font-weight: bold; border: none; background: none;
-    }
-    .navbar a:hover, .navbar button:hover { color: #007bff; cursor: pointer; }
-    pre.receipt-box, pre.report-box {
-      background: #fff; border: 1px solid #ddd; padding: 15px;
-      white-space: pre-wrap; font-family: monospace; max-height: 300px; overflow-y: auto;
-    }
-    @media print {
-      body * { visibility: hidden; }
-      #printArea, #printArea * { visibility: visible; }
-      #printArea { position: absolute; left: 0; top: 0; width: 100%; }
-    }
-    #loginPage, #mainApp { display: none; }
-  </style>
-</head>
-<body style="background-image: url(images/mayondo.png); background-position: center; background-size:cover; height:100vh;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF — Sales Management</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #264653;
+        margin: 0;
+        padding: 24px;
+        color: #d8c3a5;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      header p {
+        color: #6b7280;
+      }
 
-  <!-- Login Page -->
-  <div id="loginPage" class="container mt-5">
-    <div class="card p-4 shadow" style="background-color: wheat;">
-      <h3 class="text-center mb-3">Login</h3>
-      <form id="loginForm">
-        <div class="mb-3">
-          <label class="form-label">Username</label>
-          <input type="text" id="username" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" id="password" class="form-control" required />
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-      </form>
-      <p class="text-danger mt-2" id="loginError" style="display:none;">Invalid username or password</p>
-    </div>
-  </div>
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        gap: 30px;
+      }
+      section {
+        background: #5b3a29;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        color: #6b7280;
+      }
 
-  <!-- Main Application -->
-  <div id="mainApp">
-    <!-- Navbar -->
-    <div class="navbar">
-      <div class="brand">
-        <img src="images/logo.jpg" alt="Logo" />
-        <span class="brand-text">Mayondo Wood and Furniture</span>
+      label {
+        display: block;
+        margin: 10px 0 4px;
+        font-weight: 500;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background-color: #6b7280;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      button {
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .add {
+        background: #6b7280;
+        color: #d8c3a5;
+        margin-top: 12px;
+      }
+      .danger {
+        background: #e07a5f;
+        color: #d8c3a5;
+      }
+      .secondary {
+        background: #6b7280;
+        color: #d8c3a5;
+      }
+      .warning {
+        background: #e07a5f;
+        color: #d8c3a5;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+      }
+      th {
+        background: #6b7280;
+        font-weight: 600;
+      }
+
+      .summary {
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      pre {
+        background: #6b7280;
+        padding: 15px;
+        border-radius: 8px;
+        max-height: 250px;
+        overflow-y: auto;
+      }
+
+      .receipt {
+        font-family: monospace;
+        background: #fff;
+        padding: 20px;
+        border: 1px dashed #333;
+        width: 300px;
+        margin: auto;
+      }
+      .receipt h3,
+      .receipt p {
+        margin: 4px 0;
+        text-align: center;
+      }
+      .receipt table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin-top: 10px;
+      }
+      .receipt td {
+        padding: 4px 0;
+      }
+      .receipt .total-line {
+        border-top: 1px dashed #000;
+        font-weight: bold;
+      }
+
+    /* Preview styling */
+.receipt-preview {
+  margin: 20px auto;
+  max-width: 320px;
+}
+
+/* Printing rules */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printArea, #printArea * {
+    visibility: visible;
+  }
+  #printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div
+        class="navbar"
+        style="
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #5b3a29;
+        "
+      >
+        <img
+          src="images/logo.jpg"
+          alt="Logo"
+          style="
+            width: 80px;
+            margin-right: 10px;
+            border-radius: 50%;
+            display: flex;
+          "
+        />
+        <span class="brand-text fw-bold">Mayondo Wood and Furniture</span>
       </div>
-      <a href="products.html">Products</a>
-      <a href="users.html">Users</a>
-      <a href="suppliers.html">Suppliers</a>
-      <a href="rawmaterial.html">Raw Materials</a>
-      <a href="Admin.html">Admin</a>
-      <button onclick="logout()">Logout</button>
-    </div>
+      <h1>Sales Management</h1>
+      <p>Record and review sales transactions</p>
+    </header>
 
-    <!-- Sales Table -->
-    <div class="container mt-5">
-      <h2 class="text-center mb-4" style="color: seashell;">Sales Entry Table</h2>
-      <form id="salesTableForm">
-        <table class="table table-bordered table-striped align-middle text-center">
-          <thead class="table-dark">
+    <div class="container">
+      <!-- Sales Entry Form -->
+      <section>
+        <h2>Add Sale</h2>
+        <div class="form-grid">
+          <div>
+            <label>Date</label>
+            <input type="date" id="saleDate" />
+          </div>
+          <div>
+            <label>Time</label>
+            <input type="time" id="saleTime" />
+          </div>
+          <div>
+            <label>Product</label>
+            <input type="text" id="product" />
+          </div>
+          <div>
+            <label>Quantity</label>
+            <input type="number" id="quantity" min="1" value="1" />
+          </div>
+          <div>
+            <label>Unit Price (UGX)</label>
+            <input type="number" id="unitPrice" min="0" value="0" />
+          </div>
+          <div>
+            <label>Transport</label>
+            <div class="checkbox">
+              <input type="checkbox" id="transportUsed" />
+              <span>Apply 5% transport fee</span>
+            </div>
+          </div>
+          <div>
+            <label>Payment Method</label>
+            <select id="paymentMethod">
+              <option value="Cash">Cash</option>
+              <option value="Cheque">Cheque</option>
+              <option value="Overdraft">Overdraft</option>
+            </select>
+          </div>
+          <div>
+            <label>Customer Name</label>
+            <input type="text" id="customer" />
+          </div>
+          <div>
+            <label>Attendant</label>
+            <select id="attendant"></select>
+          </div>
+        </div>
+        <button class="add" onclick="addSale()">Save Sale</button>
+      </section>
+
+      <!-- Sales Table -->
+      <section>
+        <h2>Sales Records</h2>
+        <table id="salesTable">
+          <thead>
             <tr>
-              <th>Salesperson</th>
-              <th>Role</th>
               <th>Date</th>
               <th>Time</th>
-              <th>Item Sold</th>
-              <th>Quantity</th>
-              <th>Price/Unit</th>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
               <th>Transport</th>
-              <th>Total Price</th>
-              <th>Customer</th>
+              <th>Total</th>
               <th>Payment</th>
-              <th>Notes</th>
-              <th>Action</th>
+              <th>Customer</th>
+              <th>Attendant</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="tableBody">
-            <tr>
-              <td><input type="text" name="salesperson" class="form-control" required /></td>
-              <td>
-                <select name="role" class="form-select" required>
-                  <option value="">Select</option>
-                  <option>Salesperson</option>
-                  <option>Manager</option>
-                </select>
-              </td>
-              <td><input type="date" name="date" class="form-control" required /></td>
-              <td><input type="time" name="time" class="form-control" required /></td>
-              <td><input type="text" name="item" class="form-control" required /></td>
-              <td><input type="number" name="quantity" class="form-control quantity" min="1" required /></td>
-              <td><input type="number" name="price" class="form-control price" step="0.01" required /></td>
-              <td><input type="checkbox" name="transport" class="form-check-input transport" /></td>
-              <td><input type="text" name="total" class="form-control total" readonly /></td>
-              <td><input type="text" name="customer" class="form-control" required /></td>
-              <td>
-                <select name="payment" class="form-select" required>
-                  <option value="">Select</option>
-                  <option>Cash</option>
-                  <option>Cheque</option>
-                  <option>Bank Overdraft</option>
-                </select>
-              </td>
-              <td><input type="text" name="notes" class="form-control" /></td>
-              <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
+        <div class="summary" id="summary"></div>
+      </section>
 
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-success" onclick="addRow()">Add Row</button>
-          <button type="submit" class="btn btn-primary">Submit All</button>
-        </div>
-      </form>
+      <!-- Manager Report -->
+      <section>
+        <h2>Manager Report</h2>
+        <pre id="reportBox">No report generated yet.</pre>
+        <button class="warning" onclick="generateReport()">
+          Generate Report
+        </button>
+        <button class="secondary" onclick="printReport()">Print Report</button>
+      </section>
 
-      <!-- Receipt -->
-      <div class="mt-4" id="printArea">
-        <h4 style="color: #fff;">Receipt</h4>
-        <pre class="receipt-box" id="receiptBox">No sales recorded yet.</pre>
-      </div>
-      <button class="btn btn-info mt-2" onclick="printReceipt()">Print Receipt</button>
-
-      <!-- Report -->
-      <div class="mt-4">
-        <h4 style="color: #fff;">Manager Report</h4>
-        <pre class="report-box" id="reportBox">No report generated yet.</pre>
-        <button class="btn btn-warning mt-2" onclick="generateReport()">Generate Sales Report</button>
-        <button class="btn btn-secondary mt-2" onclick="printReport()">Print Report</button>
-      </div>
+      <!-- Print Area for Receipts -->
+      <div id="printArea" class="receipt-preview"></div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container text-center">
-        <p class="mb-0">&copy; Mayondo wood and furniture. All rights reserved.</p>
-      </div>
-    </footer>
-  </div>
-
-  <script src="sales.js"></script>
-</body>
+<script src="sales.js"></script>
+  </body>
 </html>

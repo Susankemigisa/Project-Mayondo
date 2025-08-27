@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF — High Level Report & Strategy</title>
+    <style>
+      :root {
+        --bg: #264653;
+        --card: #2F4F4F;
+        --text: #1A1A1A;
+        --muted: #6b7280;
+        --brand: #1f2937;
+        --radius: 12px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 24px;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      header p {
+        color: var(--muted);
+        margin: 4px 0 0;
+      }
+
+      .report {
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 32px;
+        display: grid;
+        gap: 28px;
+      }
+
+      section h2 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        color: var(--brand);
+      }
+      section h3 {
+        margin: 16px 0 8px;
+        font-size: 16px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .action-plan {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+      .action {
+        border: 1px solid #7d7d7d;
+        border-radius: var(--radius);
+        padding: 16px;
+        background: #264653;;
+      }
+      .action h4 {
+        margin: 0 0 6px;
+        font-size: 15px;
+        color: var(--brand);
+      }
+
+      .btn-export {
+        display: inline-block;
+        margin-top: 20px;
+        background: var(--brand);
+        color: var(--muted);
+        padding: 10px 16px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+      }
+      .btn-export:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mayondo Wood & Furniture Ltd</h1>
+      <p>High-Level Business Report & Strategic Recommendations</p>
+    </header>
+
+    <div class="report" id="reportContent">
+      <section>
+        <h2>Executive Summary</h2>
+        <p>
+          In July 2025, Mayondo Wood & Furniture (MWF) recorded strong
+          performance in both the <strong>wood</strong> and
+          <strong>furniture</strong> categories. Sales agents drove significant
+          growth, with top contributions from institutional clients such as
+          construction companies and estates. Transport services, which attract
+          a 5% surcharge, were applied in ~45% of transactions, adding a notable
+          revenue stream.
+        </p>
+      </section>
+
+      <section>
+        <h2>Business Performance Report</h2>
+        <h3>Key KPIs</h3>
+        <ul>
+          <li><strong>Total Revenue:</strong> UGX 124M</li>
+          <li><strong>Orders Processed:</strong> 48</li>
+          <li><strong>Average Order Value (AOV):</strong> UGX 2.6M</li>
+          <li><strong>Gross Margin:</strong> 36%</li>
+          <li><strong>Transport Usage:</strong> 45% of orders</li>
+        </ul>
+
+        <h3>Highlights</h3>
+        <ul>
+          <li>
+            🔥 <strong>Top Category:</strong> Furniture contributed 60% of
+            revenue.
+          </li>
+          <li>
+            💰 <strong>Top Product:</strong> Sofa Sets generated the highest
+            gross profit.
+          </li>
+          <li>
+            🧑‍💼 <strong>Top Agent:</strong> Nabwire led sales by revenue
+            contribution.
+          </li>
+          <li>
+            🚚 <strong>Transport:</strong> Added ~UGX 6M in additional revenue.
+          </li>
+          <li>
+            🏦 <strong>Payment Mix:</strong> Cash dominant; overdraft usage at
+            18%.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Challenges & Risks</h2>
+        <ul>
+          <li>
+            ⚠️ Stockouts observed for certain timber sizes (high demand, limited
+            supply).
+          </li>
+          <li>
+            ⚠️ Over-reliance on large institutional buyers exposes revenue to
+            contract risks.
+          </li>
+          <li>
+            ⚠️ Transport costs rising due to fuel prices; reliance on 3rd-party
+            vehicles.
+          </li>
+          <li>
+            ⚠️ Overdraft payments, though small, pose liquidity risks if they
+            grow.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Strategic Recommendations</h2>
+        <ul>
+          <li>
+            📦 Implement <strong>stock optimization</strong> with real-time
+            alerts to avoid stockouts.
+          </li>
+          <li>
+            🤝 Diversify customer base by targeting SMEs and retailers, not only
+            big contractors.
+          </li>
+          <li>
+            💳 Incentivize <strong>cash/cheque payments</strong> to reduce
+            overdraft dependency.
+          </li>
+          <li>
+            🚛 Evaluate leasing or acquiring vehicles to reduce transport costs
+            long-term.
+          </li>
+          <li>
+            🛠️ Expand the workshop to increase
+            <strong>value-added furniture production</strong>.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Action Plan</h2>
+        <div class="action-plan">
+          <div class="action">
+            <h4>Short Term (0–6 months)</h4>
+            <ul>
+              <li>Enable automated stock reporting.</li>
+              <li>Launch targeted sales campaigns for SMEs.</li>
+              <li>Negotiate better transport contracts.</li>
+            </ul>
+          </div>
+          <div class="action">
+            <h4>Medium Term (6–12 months)</h4>
+            <ul>
+              <li>Acquire one delivery truck.</li>
+              <li>Expand showroom product variety.</li>
+              <li>Introduce customer loyalty discounts.</li>
+            </ul>
+          </div>
+          <div class="action">
+            <h4>Long Term (>12 months)</h4>
+            <ul>
+              <li>Open new regional branches.</li>
+              <li>Develop exclusive furniture lines.</li>
+              <li>Seek partnerships with real estate developers.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="muted">
+        Prepared: August 2025 • Mayondo Wood & Furniture Ltd
+      </div>
+    </div>
+
+    <div style="text-align: center">
+      <button class="btn-export" onclick="window.print()">
+        Export / Print Report
+      </button>
+    </div>
+  </body>
+</html>
